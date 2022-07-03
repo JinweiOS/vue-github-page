@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: 部署vue默认页面到github pages
 
 # Controls when the workflow will run
 on:
@@ -23,5 +23,26 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: 拉取代码 
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 设置运行环境（Node.js)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: 构建项目
+        run: npm run build
+
+      - name: 部署到PAGES
+        use: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: pjw-pg
+          folder: dist/
+
       
