@@ -40,7 +40,7 @@ jobs:
         run: npm run build
 
       - name: 部署到PAGES
-        use: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: pjw-pg
           folder: dist/
